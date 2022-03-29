@@ -1,5 +1,5 @@
-import { now } from 'lodash';
-import mongoose from 'mongoose';
+// import { now } from 'lodash';
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const logEntrySchema = new Schema({
@@ -41,7 +41,7 @@ const logEntrySchema = new Schema({
         type: Date
     },
 
-    timestamps: true,
+    // timestamps: true,
 });
 
 const logEntry = mongoose.model('LogEntry', logEntrySchema);
