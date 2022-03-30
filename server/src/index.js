@@ -10,25 +10,16 @@ require('dotenv').config();
 
 const app = express()
 
-// mongoose.connect(`mongodb://${process.env.DATABASE_URL}`, () => {
-//     console.log('connected to db')
-// });
-
-// mongoose.connect(`mongodb:${process.env.DATABASE_URL}`, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   });
-async function main() {
-    await mongoose.connect(`mongodb:${process.env.DATABASE_URL}`, () => {
-        console.log('Connection Verified')
-    });
+async function db() {
+    try {
+        await mongoose.connect(process.env.DATABASE_URL)
+        console.log("db connected")
+    } catch (error) {
+        console.log(error)
+    }
 }
-main().catch(err => console.log(err));
 
-
-
-
-
+db()
 
 app.use(morgan('common'));
 
@@ -53,9 +44,7 @@ app.use(middleswares.notFound);
 // Error handler Middleware
 app.use(middleswares.errorHandler);
 
-
 const port = process.env.PORT || 1337;
-
 app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}`);
 })

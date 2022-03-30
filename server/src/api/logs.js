@@ -11,13 +11,17 @@ router.get('/', (req, res,) => {
 
 router.post('/', async (req, res, next) => {
     try {
-        const logEntry = new LogEntry(req.body);
+        const logEntry = await new LogEntry(req.body);
         const createdEntry = await logEntry.save();
         res.json(createdEntry)
     } catch (error) {
+        console.log(error.name)
+        console.log(error, "ERROR")
+        if (error.name === 'Validation Error') {
+            res.status(422);
+        }
         next(error);
     }
-
 })
 
 module.exports = router;
