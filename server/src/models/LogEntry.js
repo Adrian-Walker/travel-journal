@@ -40,8 +40,8 @@ const logEntrySchema = new Schema({
         required: true,
         type: Date
     },
-
-    // timestamps: true,
+},{
+    timestamps: true,
 });
 
 const logEntry = mongoose.model('LogEntry', logEntrySchema);
