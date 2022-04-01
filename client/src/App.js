@@ -1,38 +1,21 @@
 import React from 'react';
-import DeckGL from '@deck.gl/react';
-import { LineLayer } from '@deck.gl/layers';
-import { Map } from 'react-map-gl';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 
 
+function App() {
 
-// Viewport settings
-const INITIAL_VIEW_STATE = {
-    longitude: -122.41669,
-    latitude: 37.7853,
-    zoom: 13,
-    pitch: 0,
-    bearing: 0
-};
+    <MapContainer center={[51.505, -0.09]} zoom={13} style={{ height: '100%' }}>
+        <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <Marker position={[51.505, -0.09]}>
+            <Popup>
+                A pretty CSS3 popup. <br /> Easily customizable.
+            </Popup>
+        </Marker>
+    </MapContainer>
 
-// Data to be used by the LineLayer
-const data = [
-    { sourcePosition: [-122.41669, 37.7853], targetPosition: [-122.41669, 37.781] }
-];
-
-function App({ data }) {
-    const layers = [
-        new LineLayer({ id: 'line-layer', data })
-    ];
-
-    return (
-        <DeckGL
-            initialViewState={INITIAL_VIEW_STATE}
-            controller={true}
-            layers={layers}
-        >
-            <Map mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN} />
-        </DeckGL>
-    );
 }
 
 
