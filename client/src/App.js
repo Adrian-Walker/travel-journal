@@ -1,23 +1,21 @@
 import React from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
-
+// import * as React from 'react';
+import Map from 'react-map-gl';
 
 function App() {
+    const [viewState, setViewState] = React.useState({
+        longitude: -100,
+        latitude: 40,
+        zoom: 2.5
+    });
+    console.log(process.env.REACT_APP_MAPBOX_TOKEN)
 
-    <MapContainer center={[51.505, -0.09]} zoom={13} style={{ height: '100%' }}>
-        <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <Marker position={[51.505, -0.09]}>
-            <Popup>
-                A pretty CSS3 popup. <br /> Easily customizable.
-            </Popup>
-        </Marker>
-    </MapContainer>
-
+    return <Map
+        {...viewState}
+        onMove={evt => setViewState(evt.viewState)}
+        mapStyle="mapbox://styles/mapbox/streets-v11"
+        style={{width: "80vw", height: "80vh", margin: "auto"}}
+        mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+    />;
 }
-
-
-
 export default App
