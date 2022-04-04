@@ -5,7 +5,7 @@ import { listLogEntries } from './API'
 
 function App() {
     const [logEntries, setLogEntries] = useState([]);
-    const [showPopup, setShowPopup] = useEffect({})
+    const [showPopup, setShowPopup] = useState({})
     const [viewState, setViewState] = useState({
         longitude: -100,
         latitude: 40,
