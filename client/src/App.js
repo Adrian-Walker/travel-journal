@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import Map, { Marker, Popup } from 'react-map-gl';
 import { listLogEntries } from './API'
@@ -13,10 +14,15 @@ function App() {
     });
 
     useEffect(() => {
-        (async () => {
-            const logEntries = await listLogEntries();
-            setLogEntries(logEntries)
-        })();
+        // (async () => {
+        //     const logEntries = await listLogEntries();
+        //     setLogEntries(logEntries)
+        //     console.log(logEntries)
+        // })();
+        axios.get('http://localhost:1337/api/logs')
+            .then(res => {
+                setLogEntries(res.data)
+            })
     }, []);
 
     return <Map
